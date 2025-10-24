@@ -1,5 +1,5 @@
 // Script handles form validation, POST to Apps Script and redirect to Drive program
-const scriptURL = 'https://script.google.com/macros/s/AKfycbzgLV5iTlUefrlWjqCYqiixAdxJpjYefYKXQOL7NhnSxKWH8LGsZ_OvNQhVZPsuLMpAmw/exec';
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyXATQQwmfBDQ0wqjIFfJHNhwf9JtHXLu6cdKJOKmaQmxUGh7lVBKDuzwu34sKNLtNb0w/exec';
 const driveLink = 'https://docs.google.com/spreadsheets/d/1jdNHHfwt9xcQX8ieAnfXIOFeX9q6s9unamM_Pbi-FPY/edit?usp=drivesdk';
 
 function isValidEmail(email) {
