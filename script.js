@@ -1,58 +1,56 @@
-// Script handles form validation, POST to Apps Script and redirect to Drive program
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyXATQQwmfBDQ0wqjIFfJHNhwf9JtHXLu6cdKJOKmaQmxUGh7lVBKDuzwu34sKNLtNb0w/exec';
-const driveLink = 'https://docs.google.com/spreadsheets/d/1jdNHHfwt9xcQX8ieAnfXIOFeX9q6s9unamM_Pbi-FPY/edit?usp=drivesdk';
-
-function isValidEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(String(email).toLowerCase());
-}
-
-document.getElementById('signup-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const nameEl = document.getElementById('name');
-  const emailEl = document.getElementById('email');
-  const msgEl = document.getElementById('form-msg');
-
-  const name = nameEl.value.trim();
-  const email = emailEl.value.trim();
-
-  if (!name) {
-    msgEl.textContent = 'Merci d’indiquer ton nom et prénom.';
-    nameEl.focus();
-    return;
-  }
-  if (!email || !isValidEmail(email)) {
-    msgEl.textContent = 'Merci d’indiquer une adresse e‑mail valide.';
-    emailEl.focus();
-    return;
-  }
-
-  // Disable UI while sending
-  const submitBtn = document.getElementById('submit-btn');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Envoi en cours...';
-
-  // Send to Apps Script
-  try {
-    await fetch(scriptURL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new URLSearchParams({ name: name, email: email })
+document.addEventListener('DOMContentLoaded', () => {
+  // Animation fade-in
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
-    // Show success message then redirect to Drive
-    msgEl.textContent = '✅ Inscription enregistrée — redirection vers le programme...';
-    // small delay to ensure Apps Script receives the request
-    setTimeout(function() {
-      window.location.href = driveLink;
-    }, 700);
-  } catch (err) {
-    console.error(err);
-    msgEl.textContent = '❌ Erreur lors de l\'envoi, réessaie plus tard.';
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Accéder au programme';
-  }
+  });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Formulaire Google Apps Script
+  const form = document.getElementById('programForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message');
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyXATQQwmfBDQ0wqjIFfJHNhwf9JtHXLu6cdKJOKmaQmxUGh7lVBKDuzwu34sKNLtNb0w/exec";
+
+    if (!name || !email) {
+      message.textContent = "Veuillez remplir tous les champs.";
+      message.style.color = "red";
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      message.textContent = "Adresse e-mail invalide.";
+      message.style.color = "red";
+      return;
+    }
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        body: new URLSearchParams({ name, email }),
+      });
+      const result = await response.json();
+
+      if (result.result === "success") {
+        message.textContent = "✅ Merci ! Redirection vers ton programme...";
+        message.style.color = "lightgreen";
+        setTimeout(() => {
+          window.location.href = "https://docs.google.com/spreadsheets/d/1jdNHHfwt9xcQX8ieAnfXIOFeX9q6s9unamM_Pbi-FPY/edit?usp=drivesdk";
+        }, 1500);
+      } else {
+        message.textContent = "Erreur, réessaye.";
+        message.style.color = "red";
+      }
+    } catch (err) {
+      message.textContent = "Erreur de connexion.";
+      message.style.color = "red";
+    }
+  });
 });
