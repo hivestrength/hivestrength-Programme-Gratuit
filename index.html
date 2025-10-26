@@ -1,61 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Programme Gratuit — Hive Strength</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hive Strength | Programme Gratuit</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="logo-wrap">
-        <!-- Placez votre logo dans le dossier et nommez-le exactement : LOLO FINAL_LOGO TYPO BLANCHE.png -->
-        <img src="LOGO FINAL_LOGO TYPO BLANCHE.png" alt="Hive Strength" class="logo">
-      </div>
-    </header>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-content">
+      <img src="LOGO FINAL_LOGO TYPO BLANCHE.png" alt="Hive Strength Logo" class="logo">
+      <h1>HIVE STRENGTH</h1>
+    </div>
+  </header>
 
-    <main>
-      <section id="hero" class="card">
-        <h1>Programme Gratuit — Hive Strength</h1>
-        <p class="lead">Programme sur 8 semaines pour progresser sur les mouvements SBD.<br>
-        Comprend des vidéos explicatives : échauffement, variations et mobilité.</p>
-
-        <form id="signup-form" novalidate>
-          <label for="name">Nom Prénom</label>
-          <input id="name" name="name" type="text" placeholder="Nom et prénom" required>
-
-          <label for="email">E-mail</label>
-          <input id="email" name="email" type="email" placeholder="Adresse email" required>
-
-          <button id="submit-btn" type="submit">Accéder au programme</button>
-          <p id="form-msg" class="form-msg" aria-live="polite"></p>
-        </form>
-
-        <p class="how">Comment ça marche : tu entres ton e-mail → tu reçois l'accès au programme (copie à faire via <em>Fichier → Créer une copie</em>).</p>
-      </section>
-
-      <section id="videos" class="card">
-        <h2>Vidéos explicatives incluses</h2>
-        <ul>
-          <li>Échauffement (séquence vidéo)</li>
-          <li>Variations (pause, tempo, variations SBD)</li>
-          <li>Mobilité (hanches, épaules, bas du dos)</li>
-        </ul>
-        <p>Les vidéos sont disponibles depuis la page principale (YouTube) après inscription.</p>
-      </section>
-    </main>
-
-    <footer>
-      <p>Contact : <a href="mailto:hivestrength@gmail.com">hivestrength@gmail.com</a></p>
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <section class="left fade-in">
+      <h2>Programme Gratuit - 8 Semaines Structurées</h2>
       <p>
-        <a href="https://www.instagram.com/hivestrength" target="_blank" rel="noopener">Instagram</a> ·
-        <a href="https://www.youtube.com/@HIVESTRENGTH" target="_blank" rel="noopener">YouTube</a>
+        Ce programme est conçu pour t’aider à progresser efficacement sur les trois mouvements principaux
+        de la force athlétique : <strong>Squat</strong>, <strong>Bench</strong> et <strong>Deadlift</strong>.
       </p>
-      <p class="copyright">© Hive Strength</p>
-    </footer>
-  </div>
+      <ul>
+        <li><strong>8 semaines de programmation structurée</strong></li>
+        <li><strong>Accessible aux débutants et confirmés</strong></li>
+        <li>Utilisation des <strong>RPE</strong> pour t’aider à mieux gérer ta charge d’entraînement</li>
+        <li>Vidéos explicatives pour : échauffements, variations, mobilité</li>
+      </ul>
+      <p>
+        📘 Le programme est au format Google Sheets.  
+        Pour l’utiliser, <strong>crée une copie</strong> dans ton propre Drive après l’avoir ouvert.
+      </p>
+    </section>
 
-<script src="script.js"></script>
+    <section class="right fade-in">
+      <h3>Reçois ton programme</h3>
+      <form id="programForm">
+        <input type="text" id="name" name="name" placeholder="Nom et Prénom" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <button type="submit">Obtenir le programme</button>
+      </form>
+      <p id="message"></p>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="#" target="_blank">Instagram</a> |
+      <a href="#" target="_blank">YouTube</a>
+    </div>
+    <p>© 2025 Hive Strength — Tous droits réservés</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
